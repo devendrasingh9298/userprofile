@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" type="" href="./style.css">
+</head>
+<body>
+    <ul>
+      <li><a href="./index.html">Home</a></li>
+      <li><a href="./login.html">Login</a></li>
+      <li><a class="active" href="./registration.html">SignUp</a></li>
+    </ul>
+    <div class="main">
+    <form action="#">
+        <input type="text" id="name" placeholder="Enter your name"><br><br>
+        <input type="text" id="email" placeholder="Enter your email"><br><br>
+        <input type="text" id="password" placeholder="Enter your password"><br><br>
+        <button type="submit" onclick="saveData()">Submit</button>
+        <button type="reset">Reset</button>
+        <br>
+        <p>Already registered. <a href="./login.html">click here</a> </p>
+    </form>
+    </div>
+</body>
+<script>
+    function saveData(){
+        let name,email,password;
+        name=document.getElementById('name').value;
+        email=document.getElementById('email').value;
+        password=document.getElementById('password').value;
+
+        let user_records = new Array();
+        user_records=JSON.parse(localStorage.getItem("users"))?JSON.parse(localStorage.getItem("users")):[]
+        if(user_records.some((v)=>{
+            return v.email==email;
+        })){
+            alert("Already registered...")
+        }else{
+            user_records.push({
+                "name":name,
+                "email":email,
+                "password":password
+            })
+            localStorage.setItem("users",JSON.stringify(user_records));
+            alert("Registered Successfully...")
+        
+        }
+    }
+</script>
+</html>
